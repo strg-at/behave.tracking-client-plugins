@@ -1,0 +1,34 @@
+{
+  "name": "@strg-behave/tracking-plugin-scroll",
+  "version": "4.0.1",
+  "description": "strg.beHave - Tracking Client Library",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "npm run test && npm run build",
+    "build": "babel src -d lib",
+    "test": "jest",
+    "coverage": "npm run test && http-server ./coverage/lcov-report/ -p 8888 -o",
+    "lint": "eslint ./src",
+    "lint:fix": "eslint ./src --fix"
+  },
+  "author": "Ralf Traunsteiner <ralf@strg.at>",
+  "contributors": [
+    "Nils Müller <nils.mueller@strg.at"
+  ],
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
+    "@babel/plugin-transform-classes": "^7.7.0",
+    "@babel/preset-env": "^7.6.3",
+    "babel-plugin-transform-es2015-modules-simple-commonjs": "^0.3.0",
+    "babel-eslint": "^10.0.3",
+    "babel-jest": "^24.9.0",
+    "eslint": "^6.5.1",
+    "eslint-plugin-jest": "^22.20.0",
+    "eslint-plugin-node": "^10.0.0",
+    "jest": "^24.9.0",
+    "standard": "^14.3.1",
+    "http-server": "^0.11.1"
+  }
+}
