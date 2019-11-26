@@ -1,7 +1,7 @@
 {
   "name": "@strg-behave/tracking-plugin-scroll",
-  "version": "4.0.1",
-  "description": "strg.beHave - Tracking Client Library",
+  "version": "0.1.0",
+  "description": "strg.beHave - Tracking Client Scroll Plugin",
   "main": "src/index.js",
   "scripts": {
     "start": "npm run test && npm run build",
