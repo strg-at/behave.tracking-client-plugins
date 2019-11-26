@@ -1,10 +1,13 @@
-import { getUriFromLocation } from './util/url'
-
 /**
  * @module strgBeHave/tracking/plugin/url
  */
 export function createUrlTracking (config) {
   global[config.NAMESPACE] = global[config.NAMESPACE] || []
+
+  const getUriFromLocation = function () {
+    const port = global.location.port ? `:${global.location.port}` : ''
+    return `${global.location.protocol}//${global.location.hostname}${$port}${global.location.pathname}`
+  }
 
   return {
     trackUrlFromLocation() {
@@ -13,6 +16,7 @@ export function createUrlTracking (config) {
         value: getUriFromLocation(),
         time: Date.now(),
       })
-    }
+    },
+    getUriFromLocation,
   }
 }
