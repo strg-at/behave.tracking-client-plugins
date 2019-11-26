@@ -18,6 +18,7 @@ The library is better known as breakpointmeter, it tracks the scroll depth in co
 ```javascript
 const config = {
   NAMESPACE: 'test',
+  ARTICLE_SELECTOR: 'article',
 }
 ```
 <br>
@@ -32,9 +33,8 @@ const scrollTracking = createScrollTracking(config)
 
 ### register
 ```javascript
-const articleSelector = 'article'
 const articleElement = [] // Cast to array and pick first found
-  .concat(articleSelector)
+  .concat(config.ARTICLE_SELECTOR)
   .map(selector => document.querySelector(selector))
   .filter(el => !!el)
   .shift()
