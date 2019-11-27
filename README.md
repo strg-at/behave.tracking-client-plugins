@@ -133,4 +133,6 @@ npm version major|minor|patch
 <br>
 
 ## Authors
-* **[Ralf Traunsteiner](mailto:ralf.traunsteiner@strg.at)** - *implementation*
+* **[Ralf Traunsteiner](mailto:ralf.traunsteiner@strg.at)** - *plugin implementations*
+* **[Nils Müller](mailto:nils.mueller@strg.at)** - *library*
+
