@@ -12,7 +12,7 @@ export function createReferrerTracking (config) {
   }
 
   return {
-    trackUrlFromLocation() {
+    track() {
       global[config.NAMESPACE].push({
         key: 'referrer',
         value: getReferrer(),

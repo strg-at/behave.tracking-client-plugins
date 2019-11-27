@@ -10,7 +10,7 @@ export function createUrlTracking (config) {
   }
 
   return {
-    trackUrlFromLocation() {
+    track() {
       global[config.NAMESPACE].push({
         key: 'url',
         value: getUriFromLocation(),
