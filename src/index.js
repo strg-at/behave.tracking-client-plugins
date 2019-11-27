@@ -1,3 +1,3 @@
 export { createScrollTracking } from './plugin.scroll'
 export { createUrlTracking } from './plugin.url'
-export { createRefferTracking } from './plugin.referrer'
+export { createReferrerTracking } from './plugin.referrer'
