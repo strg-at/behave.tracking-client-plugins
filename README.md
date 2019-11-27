@@ -1,5 +1,5 @@
-# BeHave Tracking Plugin Scroll
-This library contains the BeHave tracking client scroll plugin, it is intended to use it inside a client application integration and not standalone.
+# BeHave Tracking Plugins
+This library contains standard BeHave tracking plugins, it is intended to use the plugins in the customer implementations and not standalone, they require [BeHave Tracking Client Library](https://bitbucket.strg.at/projects/BHV/repos/tracking-client-lib)
 
 ## Getting Started
 
@@ -8,13 +8,13 @@ This library contains the BeHave tracking client scroll plugin, it is intended t
 - [NPM 6.4.1](https://www.npmjs.com/)
 <br>
 
-## Specification
+## plugin.scroll.js
 The library is better known as breakpointmeter, it tracks the scroll depth in combination with `BeHave Tracking Client Library`.
 <br>
 
-## How to use
+### How to use:
 
-### config
+#### config
 ```javascript
 const config = {
   NAMESPACE: 'test',
@@ -23,15 +23,15 @@ const config = {
 ```
 <br>
 
-### init
+#### init
 ```javascript
-import { createScrollTracking } from '@strg-behave/tracking-plugin-scroll'
+import { createScrollTracking } from '@strg-behave/tracking-client-plugins'
 
 const scrollTracking = createScrollTracking(config)
 ```
 <br>
 
-### register
+#### register
 ```javascript
 const articleElement = [] // Cast to array and pick first found
   .concat(config.ARTICLE_SELECTOR)
@@ -46,6 +46,47 @@ if (articleElement) {
 ```
 <br>
 
+## plugin.referrer.js
+This plugin tracks the `window.referrer` URL
+
+### How to use:
+
+#### config
+```javascript
+const config = {
+  NAMESPACE: 'test',
+}
+```
+<br>
+
+#### init
+```javascript
+import { createReferrerTracking } from '@strg-behave/tracking-client-plugins'
+
+createReferrerTracking(config).track()
+```
+<br>
+
+## plugin.url.js
+This plugin tracks the `window.location` URL
+
+### How to use:
+
+#### config
+```javascript
+const config = {
+  NAMESPACE: 'test',
+}
+```
+<br>
+
+#### init
+```javascript
+import { createUrlTracking } from '@strg-behave/tracking-client-plugins'
+
+createScrollTracking(config).track()
+```
+<br>
 
 ## Development
 
