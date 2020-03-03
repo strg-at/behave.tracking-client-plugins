@@ -15,6 +15,10 @@
   "contributors": [
     "Nils Müller <nils.mueller@strg.at"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://bitbucket.strg.at/scm/bhv/tracking-client-lib.git"
+  },
   "license": "UNLICENSED",
   "devDependencies": {
     "@babel/cli": "^7.6.4",
