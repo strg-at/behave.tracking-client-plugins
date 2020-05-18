@@ -10,8 +10,8 @@ export function createScrollTracking () {
   const VISIBILITY_EVENT = 'visibility'
 
   const callbacks = {
-    BREAKPOINT_EVENT: [],
-    VISIBILITY_EVENT: [],
+    breakpoint: [],
+    visibility: [],
   }
 
   const DEFAULTS = {
@@ -146,7 +146,6 @@ export function createScrollTracking () {
             value: gp[1],
             time: Date.now(),
           }
-          console.info(callbacks)
           callbacks[BREAKPOINT_EVENT].forEach((callback) => callback(event))
           this.trackedGaugePoints[gp[1]] = true
         })
