@@ -4,8 +4,15 @@
 
 import { throttle } from './util/throttle'
 
-export function createScrollTracking (config) {
-  global[config.NAMESPACE] = global[config.NAMESPACE] || []
+export function createScrollTracking () {
+
+  const BREAKPOINT_EVENT = 'breakpoint'
+  const VISIBILITY_EVENT = 'visibility'
+
+  const callbacks = {
+    BREAKPOINT_EVENT: [],
+    VISIBILITY_EVENT: [],
+  }
 
   const DEFAULTS = {
     THROTTLE_DELAY: 200,
@@ -39,11 +46,12 @@ export function createScrollTracking (config) {
     observerCallback (entries) {
       const perc = entries[0].intersectionRatio * 100
       if (perc > this.visibilityThreshold) {
-        global[config.NAMESPACE].push({
+        const event = {
           key: this.eventKey,
           value: this.eventValue,
           time: Date.now(),
-        })
+        }
+        callbacks[VISIBILITY_EVENT].forEach((callback) => callback(event))
         this.observer.disconnect()
       }
     }
@@ -71,11 +79,12 @@ export function createScrollTracking (config) {
     trackVisibility () {
       const rect = this.DOMNode.getBoundingClientRect()
       if (this.isRectVisible(rect)) {
-        global[config.NAMESPACE].push({
-          key: eventKey,
-          value: eventValue,
+        const event = {
+          key: this.eventKey,
+          value: this.eventValue,
           time: Date.now(),
-        })
+        }
+        callbacks[VISIBILITY_EVENT].forEach((callback) => callback(event))
         global.removeEventListener('scroll', this.scrollHandler)
         global.removeEventListener('resize', this.scrollHandler)
       }
@@ -132,11 +141,12 @@ export function createScrollTracking (config) {
         .filter(gp => gp && gp[0] <= scrollDepthPixelsBottom)
         .forEach(gp => {
           if (this.trackedGaugePoints[gp[1]]) return
-          global[config.NAMESPACE].push({
+          const event = {
             key: this.eventKey,
             value: gp[1],
             time: Date.now(),
-          })
+          }
+          callbacks[BREAKPOINT_EVENT].forEach((callback) => callback(event))
           this.trackedGaugePoints[gp[1]] = true
         })
 
@@ -226,5 +236,9 @@ export function createScrollTracking (config) {
         gaugePointInterval,
       })
     },
+    on(event, callback) {
+      if(!callbacks[event]) return
+      callbacks[event].push(callback)
+    }
   }
 }

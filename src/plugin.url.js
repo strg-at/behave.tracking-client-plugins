@@ -2,7 +2,7 @@
  * @module strgBeHave/tracking/plugin/url
  */
 export function createUrlTracking (config) {
-  global[config.NAMESPACE] = global[config.NAMESPACE] || []
+  const URL_EVENT = 'url'
 
   const getUriFromLocation = function () {
     const port = global.location.port ? `:${global.location.port}` : ''
@@ -10,9 +10,11 @@ export function createUrlTracking (config) {
   }
 
   return {
-    track() {
-      global[config.NAMESPACE].push({
-        key: 'url',
+    on(event, callback) {
+      if (event !== URL_EVENT) return
+      // only happens once so no need to create a real eventListener functionality
+      callback({
+        key: URL_EVENT,
         value: getUriFromLocation(),
         time: Date.now(),
       })
