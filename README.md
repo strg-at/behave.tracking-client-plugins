@@ -17,7 +17,6 @@ The library is better known as breakpointmeter, it tracks the scroll depth in co
 #### config
 ```javascript
 const config = {
-  NAMESPACE: 'test',
   ARTICLE_SELECTOR: 'article',
 }
 ```
@@ -27,7 +26,8 @@ const config = {
 ```javascript
 import { createScrollTracking } from '@strg-behave/tracking-client-plugins'
 
-const scrollTracking = createScrollTracking(config)
+const scrollTracking = createScrollTracking()
+scrollTracking.on('breakpoint', (event) => myTracker.track(event))
 ```
 <br>
 
@@ -51,19 +51,12 @@ This plugin tracks the `window.referrer` URL
 
 ### How to use:
 
-#### config
-```javascript
-const config = {
-  NAMESPACE: 'test',
-}
-```
-<br>
-
 #### init
 ```javascript
 import { createReferrerTracking } from '@strg-behave/tracking-client-plugins'
 
-createReferrerTracking(config).track()
+const referrerTracking = createReferrerTracking()
+referrerTracking.on('referrer', (event) => myTracker.track(event))
 ```
 <br>
 
@@ -72,19 +65,12 @@ This plugin tracks the `window.location` URL
 
 ### How to use:
 
-#### config
-```javascript
-const config = {
-  NAMESPACE: 'test',
-}
-```
-<br>
-
 #### init
 ```javascript
 import { createUrlTracking } from '@strg-behave/tracking-client-plugins'
 
-createScrollTracking(config).track()
+const urlTracking = createUrlTracking()
+urlTracking.on('url', (event) => myTracker.track(event))
 ```
 <br>
 
@@ -135,4 +121,3 @@ npm version major|minor|patch
 ## Authors
 * **[Ralf Traunsteiner](mailto:ralf.traunsteiner@strg.at)** - *plugin implementations*
 * **[Nils Müller](mailto:nils.mueller@strg.at)** - *library*
-

@@ -1,8 +1,8 @@
 /**
  * @module strgBeHave/tracking/plugin/referrer
  */
-export function createReferrerTracking (config) {
-  global[config.NAMESPACE] = global[config.NAMESPACE] || []
+export function createReferrerTracking () {
+  const REFERRER_EVENT = 'referrer'
 
   const getReferrer = function () {
     if (!global.document.referrer) {
@@ -12,13 +12,14 @@ export function createReferrerTracking (config) {
   }
 
   return {
-    track() {
-      global[config.NAMESPACE].push({
-        key: 'referrer',
+    on(event, callback) {
+      if (event !== REFERRER_EVENT) return
+      // only happens once so no need to create a real eventListener functionality
+      callback({
+        key: REFERRER_EVENT,
         value: getReferrer(),
         time: Date.now(),
       })
-    },
-    getReferrer,
+    }
   }
 }
