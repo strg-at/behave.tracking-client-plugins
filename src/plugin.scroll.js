@@ -146,6 +146,7 @@ export function createScrollTracking () {
             value: gp[1],
             time: Date.now(),
           }
+          console.info(callbacks)
           callbacks[BREAKPOINT_EVENT].forEach((callback) => callback(event))
           this.trackedGaugePoints[gp[1]] = true
         })
