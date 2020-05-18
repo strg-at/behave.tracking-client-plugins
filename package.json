@@ -1,6 +1,6 @@
 {
   "name": "@strg-behave/tracking-client-plugins",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "strg.beHave - Tracking Client base plugins",
   "main": "src/index.js",
   "scripts": {
