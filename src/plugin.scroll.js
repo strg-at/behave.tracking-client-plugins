@@ -55,6 +55,10 @@ export function createScrollTracking () {
         this.observer.disconnect()
       }
     }
+
+    unbind () {
+      this.observer.disconnect()
+    }
   }
 
   class VisibilityMeterFallback {
@@ -98,6 +102,11 @@ export function createScrollTracking () {
         rect.top <= (global.innerHeight || document.documentElement.clientHeight) &&
         rect.left <= (global.innerWidth || document.documentElement.clientWidth)
       )
+    }
+
+    unbind () {
+      global.removeEventListener('scroll', this.scrollHandler)
+      global.removeEventListener('resize', this.scrollHandler)
     }
   }
 
@@ -193,6 +202,11 @@ export function createScrollTracking () {
         rect.top <= (global.innerHeight || document.documentElement.clientHeight) &&
         rect.left <= (global.innerWidth || document.documentElement.clientWidth)
       )
+    }
+
+    unbind () {
+      global.removeEventListener('scroll', this.scrollHandler)
+      global.removeEventListener('resize', this.scrollHandler)
     }
   }
 
