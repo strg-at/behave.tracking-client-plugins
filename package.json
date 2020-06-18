@@ -1,7 +1,7 @@
 {
-  "name": "@strg-behave/tracking-client-plugins",
+  "name": "@strg/behave-tracking-client-plugins",
   "version": "0.4.0",
-  "description": "strg.beHave - Tracking Client base plugins",
+  "description": "STRG.BeHave - Tracking Client base plugins",
   "main": "src/index.js",
   "scripts": {
     "start": "npm run test && npm run build",
@@ -11,15 +11,26 @@
     "lint": "eslint ./src",
     "lint:fix": "eslint ./src --fix"
   },
-  "author": "Ralf Traunsteiner <ralf@strg.at>",
+  "keywords": [
+    "Behave",
+    "STRG.BeHave",
+    "tracking",
+    "plugin"
+  ],
+  "author": "STRG.",
   "contributors": [
+    "Nils Müller <nils.mueller@strg.at",
+    "Ralf Traunsteiner <ralf@strg.at>",
+    "Andrej Bilec <andrej.bilec@smilingwords.eu>"
+  ],
+  "maintainers": [
     "Nils Müller <nils.mueller@strg.at"
   ],
   "repository": {
     "type": "git",
-    "url": "https://bitbucket.strg.at/scm/bhv/tracking-client-lib.git"
+    "url": "git+https://github.com/strg-at/behave.tracking-client-plugins.git"
   },
-  "license": "UNLICENSED",
+  "license": "MIT",
   "devDependencies": {
     "@babel/cli": "^7.6.4",
     "@babel/core": "^7.6.4",
@@ -34,5 +45,9 @@
     "jest": "^24.9.0",
     "standard": "^14.3.1",
     "http-server": "^0.11.1"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/strg-at/behave.tracking-client-plugins/issues"
+  },
+  "homepage": "https://github.com/strg-at/behave.tracking-client-plugins#readme"
 }
