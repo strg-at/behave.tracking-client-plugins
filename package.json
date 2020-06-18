@@ -20,7 +20,7 @@
   "author": "STRG.",
   "contributors": [
     "Nils Müller <nils.mueller@strg.at",
-    "Ralf Traunsteiner <ralf@strg.at>",
+    "Ralf Traunsteiner <ralf.traunsteiner@strg.at>",
     "Andrej Bilec <andrej.bilec@smilingwords.eu>"
   ],
   "maintainers": [
@@ -36,15 +36,15 @@
     "@babel/core": "^7.6.4",
     "@babel/plugin-transform-classes": "^7.7.0",
     "@babel/preset-env": "^7.6.3",
-    "babel-plugin-transform-es2015-modules-simple-commonjs": "^0.3.0",
     "babel-eslint": "^10.0.3",
-    "babel-jest": "^24.9.0",
+    "babel-jest": "^26.0.1",
+    "babel-plugin-transform-es2015-modules-simple-commonjs": "^0.3.0",
     "eslint": "^6.5.1",
     "eslint-plugin-jest": "^22.20.0",
     "eslint-plugin-node": "^10.0.0",
-    "jest": "^24.9.0",
-    "standard": "^14.3.1",
-    "http-server": "^0.11.1"
+    "http-server": "^0.12.3",
+    "jest": "^26.0.1",
+    "standard": "^14.3.1"
   },
   "bugs": {
     "url": "https://github.com/strg-at/behave.tracking-client-plugins/issues"
