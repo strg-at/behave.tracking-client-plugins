@@ -44,7 +44,7 @@
     "eslint-plugin-node": "^10.0.0",
     "http-server": "^0.12.3",
     "jest": "^26.0.1",
-    "standard": "^14.3.1"
+    "standard": "^16.0.0"
   },
   "bugs": {
     "url": "https://github.com/strg-at/behave.tracking-client-plugins/issues"
