@@ -4,8 +4,7 @@
 
 import { throttle } from './util/throttle'
 
-export function createScrollTracking () {
-
+export function createScrollTracking() {
   const BREAKPOINT_EVENT = 'breakpoint'
   const VISIBILITY_EVENT = 'visibility'
 
@@ -20,11 +19,14 @@ export function createScrollTracking () {
   }
 
   class VisibilityMeter {
-    constructor (DOMNode, {
-      eventKey,
-      eventValue,
-      visibilityThreshold = 65, // in percent %
-    }) {
+    constructor(
+      DOMNode,
+      {
+        eventKey,
+        eventValue,
+        visibilityThreshold = 65, // in percent %
+      }
+    ) {
       this.eventKey = eventKey
       this.eventValue = eventValue
       this.visibilityThreshold = visibilityThreshold
@@ -33,17 +35,15 @@ export function createScrollTracking () {
       for (let i = 0; i <= 1.0; i += 0.1) {
         threshold.push(i)
       }
-      this.observer = new IntersectionObserver(
-        (entries) => this.observerCallback(entries),
-        {
-          root: null,
-          rootMargin: '0px',
-          threshold,
-        })
+      this.observer = new IntersectionObserver((entries) => this.observerCallback(entries), {
+        root: null,
+        rootMargin: '0px',
+        threshold,
+      })
       this.observer.observe(DOMNode)
     }
 
-    observerCallback (entries) {
+    observerCallback(entries) {
       const perc = entries[0].intersectionRatio * 100
       if (perc > this.visibilityThreshold) {
         const event = {
@@ -56,23 +56,25 @@ export function createScrollTracking () {
       }
     }
 
-    unbind () {
+    unbind() {
       this.observer.disconnect()
     }
   }
 
   class VisibilityMeterFallback {
-    constructor (DOMNode, {
-      eventKey,
-      eventValue,
-      // visibilityThreshold,  // FIXME: Ignore for now
-    }) {
+    constructor(
+      DOMNode,
+      {
+        eventKey,
+        eventValue,
+        // visibilityThreshold,  // FIXME: Ignore for now
+      }
+    ) {
       this.eventKey = eventKey
       this.eventValue = eventValue
       this.DOMNode = DOMNode
 
-      this.scrollHandler = throttle(this.trackVisibility.bind(this),
-        DEFAULTS.THROTTLE_DELAY)
+      this.scrollHandler = throttle(this.trackVisibility.bind(this), DEFAULTS.THROTTLE_DELAY)
 
       global.addEventListener('scroll', this.scrollHandler)
       global.addEventListener('resize', this.scrollHandler)
@@ -80,7 +82,7 @@ export function createScrollTracking () {
       this.scrollHandler()
     }
 
-    trackVisibility () {
+    trackVisibility() {
       const rect = this.DOMNode.getBoundingClientRect()
       if (this.isRectVisible(rect)) {
         const event = {
@@ -94,7 +96,7 @@ export function createScrollTracking () {
       }
     }
 
-    isRectVisible (rect) {
+    isRectVisible(rect) {
       return (
         this.DOMNode.offsetParent !== null &&
         rect.bottom >= 0 &&
@@ -104,19 +106,14 @@ export function createScrollTracking () {
       )
     }
 
-    unbind () {
+    unbind() {
       global.removeEventListener('scroll', this.scrollHandler)
       global.removeEventListener('resize', this.scrollHandler)
     }
   }
 
   class ScrollDepthMeter {
-    constructor (DOMNode, {
-      id,
-      eventKey,
-      value = null,
-      gaugePointInterval,
-    }) {
+    constructor(DOMNode, { id, eventKey, value = null, gaugePointInterval }) {
       this.DOMNode = DOMNode
       this.id = id
       this.eventKey = eventKey
@@ -128,27 +125,25 @@ export function createScrollTracking () {
 
       this.updateGaugePoints()
 
-      this.scrollHandler = throttle(this.trackGaugePoints.bind(this),
-        DEFAULTS.THROTTLE_DELAY)
+      this.scrollHandler = throttle(this.trackGaugePoints.bind(this), DEFAULTS.THROTTLE_DELAY)
       global.addEventListener('scroll', this.scrollHandler)
       global.addEventListener('resize', this.scrollHandler)
       this.scrollHandler()
     }
 
-    trackGaugePoints () {
+    trackGaugePoints() {
       const rect = this.DOMNode.getBoundingClientRect()
       this.updateGaugePoints()
       if (!this.isRectVisible(rect)) {
         return false
       }
-      const viewPortHeight = (global.innerHeight ||
-        document.documentElement.clientHeight)
+      const viewPortHeight = global.innerHeight || document.documentElement.clientHeight
       const scrollDepthPixelsBottom = rect.height
         ? Math.max(0, Math.min(viewPortHeight - rect.top, rect.height))
         : Math.max(0, Math.min(viewPortHeight - rect.top, 1))
       this.gaugePoints
-        .filter(gp => gp && gp[0] <= scrollDepthPixelsBottom)
-        .forEach(gp => {
+        .filter((gp) => gp && gp[0] <= scrollDepthPixelsBottom)
+        .forEach((gp) => {
           if (this.trackedGaugePoints[gp[1]]) return
           const event = {
             key: this.eventKey,
@@ -172,7 +167,7 @@ export function createScrollTracking () {
       }
     }
 
-    updateGaugePoints () {
+    updateGaugePoints() {
       const rect = this.DOMNode.getBoundingClientRect()
       const interval = this.gaugePointInterval
       const result = []
@@ -180,21 +175,15 @@ export function createScrollTracking () {
       let i
       for (i = interval; i <= 100; i += interval) {
         percent = i / 100
-        result.push([
-          rect.height * percent,
-          percent * 100
-        ])
+        result.push([rect.height * percent, percent * 100])
       }
       if (i !== 100 + interval) {
-        result.push([
-          rect.height,
-          100
-        ])
+        result.push([rect.height, 100])
       }
       this.gaugePoints = result
     }
 
-    isRectVisible (rect) {
+    isRectVisible(rect) {
       return (
         this.DOMNode.offsetParent !== null &&
         rect.bottom >= 0 &&
@@ -204,24 +193,15 @@ export function createScrollTracking () {
       )
     }
 
-    unbind () {
+    unbind() {
       global.removeEventListener('scroll', this.scrollHandler)
       global.removeEventListener('resize', this.scrollHandler)
     }
   }
 
   return {
-    visibility (
-      selector,
-      {
-        eventKey,
-        eventValue = 1,
-        visibilityThreshold
-      }
-    ) {
-      const DOMNode = typeof selector === 'string'
-        ? document.querySelector(selector)
-        : selector
+    visibility(selector, { eventKey, eventValue = 1, visibilityThreshold }) {
+      const DOMNode = typeof selector === 'string' ? document.querySelector(selector) : selector
       if ('IntersectionObserver' in global) {
         return new VisibilityMeter(DOMNode, {
           eventKey,
@@ -235,24 +215,16 @@ export function createScrollTracking () {
         visibilityThreshold,
       })
     },
-    scrollDepth (
-      selector,
-      {
-        eventKey,
-        gaugePointInterval = null
-      }
-    ) {
-      const DOMNode = typeof selector === 'string'
-        ? document.querySelector(selector)
-        : selector
+    scrollDepth(selector, { eventKey, gaugePointInterval = null }) {
+      const DOMNode = typeof selector === 'string' ? document.querySelector(selector) : selector
       return new ScrollDepthMeter(DOMNode, {
         eventKey,
         gaugePointInterval,
       })
     },
     on(event, callback) {
-      if(!callbacks[event]) return
+      if (!callbacks[event]) return
       callbacks[event].push(callback)
-    }
+    },
   }
 }
