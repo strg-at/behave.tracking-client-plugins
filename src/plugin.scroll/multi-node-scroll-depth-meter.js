@@ -28,7 +28,7 @@ export class MultiNodeScrollDepthMeter {
   }
 
   getBoundingClientRectMinMax() {
-    return this.DOMNodes.reduce(
+    const rect = this.DOMNodes.reduce(
       (acc, DOMNode) => {
         const rect = DOMNode.getBoundingClientRect()
         return {
@@ -40,6 +40,8 @@ export class MultiNodeScrollDepthMeter {
       },
       { top: Infinity, right: -Infinity, bottom: -Infinity, left: Infinity }
     )
+    rect.height = rect.bottom - rect.top
+    return rect
   }
 
   trackGaugePoints() {
