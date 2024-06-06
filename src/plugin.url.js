@@ -1,7 +1,7 @@
 /**
  * @module strgBeHave/tracking/plugin/url
  */
-export function createUrlTracking (config) {
+export function createUrlTracking(config) {
   const URL_EVENT = 'url'
 
   const getUriFromLocation = function () {

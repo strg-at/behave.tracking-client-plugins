@@ -1,7 +1,7 @@
 /**
  * @module strgBeHave/tracking/plugin/referrer
  */
-export function createReferrerTracking () {
+export function createReferrerTracking() {
   const REFERRER_EVENT = 'referrer'
 
   const getReferrer = function () {
@@ -20,6 +20,6 @@ export function createReferrerTracking () {
         value: getReferrer(),
         time: Date.now(),
       })
-    }
+    },
   }
 }

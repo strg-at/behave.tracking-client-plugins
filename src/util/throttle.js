@@ -3,8 +3,10 @@
  * @description Throttle with leading/trailing option
  * src: http://underscorejs.org/docs/underscore.html#section-82
  */
-export function throttle (func, wait, options) {
-  let context; let args; let result
+export function throttle(func, wait, options) {
+  let context
+  let args
+  let result
   let timeout = null
   let previous = 0
   if (!options) options = {}
