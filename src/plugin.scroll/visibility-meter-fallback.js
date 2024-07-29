@@ -5,7 +5,7 @@
 import { throttle } from '../util/throttle'
 
 export class VisibilityMeterFallback {
-  constructor(DOMNode, { eventKey, eventValue, callbacks, VISIBILITY_EVENT, DEFAULTS }) {
+  constructor(DOMNode, { eventKey, eventValue }, callbacks, VISIBILITY_EVENT, DEFAULTS) {
     this.eventKey = eventKey
     this.eventValue = eventValue
     this.DOMNode = DOMNode

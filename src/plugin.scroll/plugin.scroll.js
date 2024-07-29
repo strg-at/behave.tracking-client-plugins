@@ -25,21 +25,28 @@ export function createScrollTracking() {
     visibility(selector, { eventKey, eventValue = 1, visibilityThreshold }) {
       const DOMNode = typeof selector === 'string' ? document.querySelector(selector) : selector
       if ('IntersectionObserver' in global) {
-        return new VisibilityMeter(DOMNode, {
+        return new VisibilityMeter(
+          DOMNode,
+          {
+            eventKey,
+            eventValue,
+            visibilityThreshold,
+          },
+          callbacks,
+          VISIBILITY_EVENT
+        )
+      }
+      return new VisibilityMeterFallback(
+        DOMNode,
+        {
           eventKey,
           eventValue,
           visibilityThreshold,
-          callbacks,
-          VISIBILITY_EVENT,
-        })
-      }
-      return new VisibilityMeterFallback(DOMNode, {
-        eventKey,
-        eventValue,
-        visibilityThreshold,
+        },
         callbacks,
         VISIBILITY_EVENT,
-      })
+        DEFAULTS
+      )
     },
     scrollDepth(selector, { eventKey, gaugePointInterval = null }) {
       const DOMNode = typeof selector === 'string' ? document.querySelector(selector) : selector
