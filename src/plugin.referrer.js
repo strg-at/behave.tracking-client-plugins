@@ -5,10 +5,10 @@ export function createReferrerTracking() {
   const REFERRER_EVENT = 'referrer'
 
   const getReferrer = function () {
-    if (!global.document.referrer) {
+    if (!window.document.referrer) {
       return null
     }
-    return global.document.referrer
+    return window.document.referrer
   }
 
   return {

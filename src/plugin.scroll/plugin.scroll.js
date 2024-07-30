@@ -24,7 +24,7 @@ export function createScrollTracking() {
   return {
     visibility(selector, { eventKey, eventValue = 1, visibilityThreshold }) {
       const DOMNode = typeof selector === 'string' ? document.querySelector(selector) : selector
-      if ('IntersectionObserver' in global) {
+      if ('IntersectionObserver' in window) {
         return new VisibilityMeter(
           DOMNode,
           {

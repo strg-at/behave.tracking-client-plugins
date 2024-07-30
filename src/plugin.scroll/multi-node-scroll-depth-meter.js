@@ -22,8 +22,8 @@ export class MultiNodeScrollDepthMeter {
     this.updateGaugePoints()
 
     this.scrollHandler = throttle(this.trackGaugePoints.bind(this), DEFAULTS.THROTTLE_DELAY)
-    global.addEventListener('scroll', this.scrollHandler)
-    global.addEventListener('resize', this.scrollHandler)
+    window.addEventListener('scroll', this.scrollHandler)
+    window.addEventListener('resize', this.scrollHandler)
     this.scrollHandler()
   }
 
@@ -50,7 +50,7 @@ export class MultiNodeScrollDepthMeter {
     if (!this.isRectVisible(rect)) {
       return false
     }
-    const viewPortHeight = global.innerHeight || document.documentElement.clientHeight
+    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight
     const scrollDepthPixelsBottom = rect.height
       ? Math.max(0, Math.min(viewPortHeight - rect.top, rect.height))
       : Math.max(0, Math.min(viewPortHeight - rect.top, 1))
@@ -68,8 +68,8 @@ export class MultiNodeScrollDepthMeter {
       })
 
     if (this.gaugePoints.length === 0) {
-      global.removeEventListener('scroll', this.scrollHandler)
-      global.removeEventListener('resize', this.scrollHandler)
+      window.removeEventListener('scroll', this.scrollHandler)
+      window.removeEventListener('resize', this.scrollHandler)
     }
   }
 
@@ -100,13 +100,13 @@ export class MultiNodeScrollDepthMeter {
       this.isAtLeastOneDOMNodeVisible() !== null &&
       rect.bottom >= 0 &&
       rect.right >= 0 &&
-      rect.top <= (global.innerHeight || document.documentElement.clientHeight) &&
-      rect.left <= (global.innerWidth || document.documentElement.clientWidth)
+      rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+      rect.left <= (window.innerWidth || document.documentElement.clientWidth)
     )
   }
 
   unbind() {
-    global.removeEventListener('scroll', this.scrollHandler)
-    global.removeEventListener('resize', this.scrollHandler)
+    window.removeEventListener('scroll', this.scrollHandler)
+    window.removeEventListener('resize', this.scrollHandler)
   }
 }

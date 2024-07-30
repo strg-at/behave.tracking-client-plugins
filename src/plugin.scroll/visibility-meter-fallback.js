@@ -15,8 +15,8 @@ export class VisibilityMeterFallback {
 
     this.scrollHandler = throttle(this.trackVisibility.bind(this), DEFAULTS.THROTTLE_DELAY)
 
-    global.addEventListener('scroll', this.scrollHandler)
-    global.addEventListener('resize', this.scrollHandler)
+    window.addEventListener('scroll', this.scrollHandler)
+    window.addEventListener('resize', this.scrollHandler)
 
     this.scrollHandler()
   }
@@ -30,8 +30,8 @@ export class VisibilityMeterFallback {
         time: Date.now(),
       }
       this.callbacks[this.VISIBILITY_EVENT].forEach((callback) => callback(event))
-      global.removeEventListener('scroll', this.scrollHandler)
-      global.removeEventListener('resize', this.scrollHandler)
+      window.removeEventListener('scroll', this.scrollHandler)
+      window.removeEventListener('resize', this.scrollHandler)
     }
   }
 
@@ -40,13 +40,13 @@ export class VisibilityMeterFallback {
       this.DOMNode.offsetParent !== null &&
       rect.bottom >= 0 &&
       rect.right >= 0 &&
-      rect.top <= (global.innerHeight || document.documentElement.clientHeight) &&
-      rect.left <= (global.innerWidth || document.documentElement.clientWidth)
+      rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+      rect.left <= (window.innerWidth || document.documentElement.clientWidth)
     )
   }
 
   unbind() {
-    global.removeEventListener('scroll', this.scrollHandler)
-    global.removeEventListener('resize', this.scrollHandler)
+    window.removeEventListener('scroll', this.scrollHandler)
+    window.removeEventListener('resize', this.scrollHandler)
   }
 }

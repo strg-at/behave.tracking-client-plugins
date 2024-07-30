@@ -5,8 +5,8 @@ export function createUrlTracking(config) {
   const URL_EVENT = 'url'
 
   const getUriFromLocation = function () {
-    const port = global.location.port ? `:${global.location.port}` : ''
-    return `${global.location.protocol}//${global.location.hostname}${port}${global.location.pathname}`
+    const port = window.location.port ? `:${window.location.port}` : ''
+    return `${window.location.protocol}//${window.location.hostname}${port}${window.location.pathname}`
   }
 
   return {
